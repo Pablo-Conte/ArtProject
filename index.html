@@ -26,11 +26,15 @@
     
     var w = window.innerWidth 
     var h = window.innerHeight 
-
-    
+    var maxElements = 1000;
+    var currentElements = 0;
     
     function choosePic() {
-            
+            if(currentElements >= maxElements){
+                document.getElementsByTagName("img")[0].remove()
+                currentElements--
+                return
+            }
             let randomPositionW = (Math.floor(Math.random() * w)-200) + "px";
             let randomPositionH = (Math.floor(Math.random() * h)-200) + "px";
             console.log(randomPositionH)
@@ -39,22 +43,33 @@
             const para = document.createElement("img");
             
             var randomNum = Math.floor(Math.random() * arrayImg.length);
-            var pppp = Math.floor(Math.random() * 200) + 200;
+            var pppp = Math.floor(Math.random() * 200) + 100;
             para.width = pppp
             para.height = pppp
             para.src = arrayImg[randomNum];
             para.style.top = randomPositionH
             para.style.left = randomPositionW
+            para.style.filter = "contrast(0%) contrast(50000) blur(5px)"
             document.body.appendChild(para);
-
             
+            const para2 = document.createElement("img");
+            
+            para2.width = pppp
+            para2.height = pppp
+            para2.src = arrayImg[randomNum];
+            para2.style.top = randomPositionH
+            para2.style.left = randomPositionW
+            document.body.appendChild(para2);
+
+            currentElements++
     }
 
     $("body").keydown(() => {
         choosePic()
-        
+        var audio = new Audio('./song/splash.mp3');
+        audio.play();
     })
     
-
 </script>
 </html>
+
