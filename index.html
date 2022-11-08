@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="biblio/jquery3.6.js"></script>
+    <title>Document</title>
+
+    <style>
+        img {
+            position: absolute;
+        }
+        body{
+            overflow: hidden;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+</body>
+
+<script>
+    
+    var arrayImg = new Array("./img/amarelo.png", "./img/azul.png", "./img/laranja.png", "./img/rosa.png", "./img/roxo.png", "./img/verde.png", "./img/vermelho.png");
+    
+    var w = window.innerWidth 
+    var h = window.innerHeight 
+
+    
+    
+    function choosePic() {
+            
+            let randomPositionW = (Math.floor(Math.random() * w)-200) + "px";
+            let randomPositionH = (Math.floor(Math.random() * h)-200) + "px";
+            console.log(randomPositionH)
+            console.log(randomPositionW)
+
+            const para = document.createElement("img");
+            
+            var randomNum = Math.floor(Math.random() * arrayImg.length);
+            var pppp = Math.floor(Math.random() * 200) + 200;
+            para.width = pppp
+            para.height = pppp
+            para.src = arrayImg[randomNum];
+            para.style.top = randomPositionH
+            para.style.left = randomPositionW
+            document.body.appendChild(para);
+
+            
+    }
+
+    $("body").keydown(() => {
+        choosePic()
+        
+    })
+    
+
+</script>
+</html>
