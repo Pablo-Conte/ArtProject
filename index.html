@@ -26,44 +26,61 @@
     
     var arrayImg = new Array("./img/amarelo.png", "./img/azul.png", "./img/laranja.png", "./img/rosa.png", "./img/roxo.png", "./img/verde.png", "./img/vermelho.png");
     
-    var w = window.innerWidth 
-    var h = window.innerHeight 
+    var w = window.screen.width; 
+    var h = window.screen.height; 
     var maxElements = 1000;
     var currentElements = 0;
     
     function choosePic() {
-            if(currentElements >= maxElements){
-                document.getElementsByTagName("img")[0].remove()
-                currentElements--
-                return
-            }
-            let randomPositionW = (Math.floor(Math.random() * w)-200) + "px";
-            let randomPositionH = (Math.floor(Math.random() * h)-200) + "px";
-            console.log(randomPositionH)
-            console.log(randomPositionW)
+        // this functions chooses a random image from the array
+        // it also chooses a random position for the image, a random size, a random rotation (TODO) and a random 
 
-            const para = document.createElement("img");
-            
-            var randomNum = Math.floor(Math.random() * arrayImg.length);
-            var pppp = Math.floor(Math.random() * 200) + 100;
-            para.width = pppp
-            para.height = pppp
-            para.src = arrayImg[randomNum];
-            para.style.top = randomPositionH
-            para.style.left = randomPositionW
-            para.style.filter = "contrast(0%) contrast(50000) blur(5px)"
-            document.body.appendChild(para);
-            
-            const para2 = document.createElement("img");
-            
-            para2.width = pppp
-            para2.height = pppp
-            para2.src = arrayImg[randomNum];
-            para2.style.top = randomPositionH
-            para2.style.left = randomPositionW
-            document.body.appendChild(para2);
+        // if there is too many elements on the screen, it removes the oldest one
+        if(currentElements >= maxElements){
+            document.getElementsByTagName("img")[0].remove()
+            currentElements--
+        }
 
-            currentElements++
+        // random number for the size of the image and the volume of the song
+        var rN = Math.random() 
+        var pppp = Math.floor(rN * 200) + 100;
+
+        // creating a random position for the image
+        let randomPositionW = (Math.floor(Math.random() * (w + pppp))-pppp) + "px";
+        let randomPositionH = (Math.floor(Math.random() * (h + pppp))-pppp) + "px";
+        
+        
+        // random numbers between the size of the array 
+        var randomNum = Math.floor(Math.random() * arrayImg.length);
+
+        
+        // setting the volume according to the size of the image
+        var audio = new Audio('./song/splash.mp3');
+        audio.volume = rN
+        audio.play();
+
+        
+        // setting the attributes of the background image
+        const para = document.createElement("img");
+        para.width = pppp
+        para.height = pppp
+        para.src = arrayImg[randomNum];
+        para.style.top = randomPositionH
+        para.style.left = randomPositionW
+        para.style.filter = "contrast(0%) contrast(50000) blur(5px)"
+        document.body.appendChild(para);
+        
+        // setting the attributes of the image
+        const para2 = document.createElement("img");
+        para2.width = pppp
+        para2.height = pppp
+        para2.src = arrayImg[randomNum];
+        para2.style.top = randomPositionH
+        para2.style.left = randomPositionW
+        document.body.appendChild(para2);
+
+        // increasing the variable that controls the number of elements on the screen
+        currentElements++
     }
 
     $("body").keydown(() => {
@@ -71,6 +88,11 @@
         var audio = new Audio('./song/splash.mp3');
         audio.play();
     })
+
+    setInterval(() => {
+        choosePic()
+        
+    }, 1000);
     
 </script>
 </html>
