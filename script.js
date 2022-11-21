@@ -34,12 +34,12 @@
         var dy = speed * Math.sin(angle);
         var newX = x + dx;
         var newY = y + dy;
-        // if(newX < 0 || newX > window.innerWidth - w){
-        //     changeDegree(180);
-        // }
-        // if(newY < 0 || newY > window.innerHeight - h){
-        //     changeDegree(180);
-        // }
+        if(newX < 0 || newX > window.innerWidth - w){
+            changeDegree(180);
+        }
+        if(newY < 0 || newY > window.innerHeight - h){
+            changeDegree(180);
+        }
         cat.style.left = newX + "px";
         cat.style.top = newY + "px";
 
