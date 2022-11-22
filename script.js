@@ -125,117 +125,8 @@
     }
 
 
-    // function splash() {
-    //     // this functions chooses a random image from the array
-    //     // it also chooses a random position for the image, a random size, a random rotation (TODO) and a random 
 
-    //     // if there is too many elements on the screen, it removes the oldest one
-    //     if(currentElements >= maxElements){
-    //         document.getElementsByTagName("img")[0].remove()
-    //         currentElements--
-    //     }
-
-    //     // random number for the size of the image and the volume of the song
-    //     var rN = Math.random() 
-    //     var pppp = Math.floor(rN * 200) + 100;
-
-    //     // creating a random position for the image
-    //     let randomPositionW = (Math.floor(Math.random() * (w + pppp))-pppp) + "px";
-    //     let randomPositionH = (Math.floor(Math.random() * (h + pppp))-pppp) + "px";
-        
-        
-    //     // random numbers between the size of the array 
-    //     var randomNum = Math.floor(Math.random() * arrayImg.length);
-
-        
-    //     // setting the volume according to the size of the image
-    //     var audio = new Audio('./song/splash.mp3');
-    //     audio.volume = rN
-    //     audio.play();
-
-        
-    //     // setting the attributes of the background image
-    //     const para = document.createElement("img");
-    //     para.width = pppp
-    //     para.height = pppp
-    //     para.src = arrayImg[randomNum];
-    //     para.style.top = randomPositionH
-    //     para.style.left = randomPositionW
-    //     para.style.filter = "contrast(0%) contrast(50000) blur(5px)"
-    //     document.body.appendChild(para);
-        
-    //     // setting the attributes of the image
-    //     const para2 = document.createElement("img");
-    //     para2.width = pppp
-    //     para2.height = pppp
-    //     para2.src = arrayImg[randomNum];
-    //     para2.style.top = randomPositionH
-    //     para2.style.left = randomPositionW
-    //     document.body.appendChild(para2);
-
-    //     // increasing the variable that controls the number of elements on the screen
-    //     currentElements++
-    // }
-
-
-
-
-
-
-
-    // function choosePic() {
-    //     // this functions chooses a random image from the array
-    //     // it also chooses a random position for the image, a random size, a random rotation (TODO) and a random 
-
-    //     // if there is too many elements on the screen, it removes the oldest one
-    //     if(currentElements >= maxElements){
-    //         document.getElementsByTagName("img")[0].remove()
-    //         currentElements--
-    //     }
-
-    //     // random number for the size of the image and the volume of the song
-    //     var rN = Math.random() 
-    //     var pppp = Math.floor(rN * 200) + 100;
-
-    //     // creating a random position for the image
-    //     let randomPositionW = (Math.floor(Math.random() * (w + pppp))-pppp) + "px";
-    //     let randomPositionH = (Math.floor(Math.random() * (h + pppp))-pppp) + "px";
-        
-        
-    //     // random numbers between the size of the array 
-    //     var randomNum = Math.floor(Math.random() * arrayImg.length);
-
-        
-    //     // setting the volume according to the size of the image
-    //     var audio = new Audio('./song/splash.mp3');
-    //     audio.volume = rN
-    //     audio.play();
-
-        
-    //     // setting the attributes of the background image
-    //     const para = document.createElement("img");
-    //     para.width = pppp
-    //     para.height = pppp
-    //     para.src = arrayImg[randomNum];
-    //     para.style.top = randomPositionH
-    //     para.style.left = randomPositionW
-    //     para.style.filter = "contrast(0%) contrast(50000) blur(5px)"
-    //     document.body.appendChild(para);
-        
-    //     // setting the attributes of the image
-    //     const para2 = document.createElement("img");
-    //     para2.width = pppp
-    //     para2.height = pppp
-    //     para2.src = arrayImg[randomNum];
-    //     para2.style.top = randomPositionH
-    //     para2.style.left = randomPositionW
-    //     document.body.appendChild(para2);
-
-    //     // increasing the variable that controls the number of elements on the screen
-    //     currentElements++
-    // }
-
-     // setting the attributes of the background image
+     // setting the attributes of the background image 
     const gato = document.createElement("img");
     gato.classList.add("cat")
     gato.style.zIndex = "100"
@@ -251,21 +142,9 @@
 
 
 
-
-    // setting the attributes of the background image
-    // const back = document.createElement("svg");
-    // back.classList.add("black")
-
-    // back.style.zIndex = "50"
-    // back.style.top = 0
-    // back.style.left = 0
-    // back.style.width = w + "px"
-    // back.style.height = h + "px"
-    // document.body.appendChild(back);
-
-
 function setSplash(x, y){
-    svg_points = [[188.180, 472.060],
+    svg_points = [
+    [188.180, 472.060],
     [184.918, 453.006],
     [199.375, 423.856],
     [238.185, 324.999],
@@ -397,25 +276,18 @@ function setSplash(x, y){
 
     let newRect = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
     
-    scale = 0.4
+    scale = 0.2
     holds = document.getElementById("holds_splashs")
     newRect.setAttribute("fill","white")
     newRect.setAttribute("transform","scale("+scale+")")
 
     cat = document.getElementsByClassName("cat")[0]
     
-    newRect.setAttribute("points", svg_points.map(p => [p[0]+cat.width+(x*(1/scale)),p[1]+(cat.height/2)+y*(1/scale)].join(" ") + ", ").join(" "));
+    newRect.setAttribute("points", svg_points.map(p => [p[0]+(cat.width/2)+(x*(1/scale)),p[1]+(cat.height/2)+y*(1/scale)].join(" ") + ", ").join(" "));
     
     holds.appendChild(newRect);
     
-    // newRect.setAttribute("points", "");
-    // newRect.setAttribute("y", "350");
-    
 }
-
-// setSplash(0,0)
-// setSplash(500,0)
-// setSplash(300,500)
 
 var arrayImg = new Array("./img/back.jpg", "./img/back2.jpg");
 var randomNum = Math.floor(Math.random() * arrayImg.length);
