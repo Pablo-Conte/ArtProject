@@ -31,3 +31,13 @@ html{
     background-color: rgba(0,0,0,0.8);
     z-index: 1;
 }
+
+
+#moldura{
+    z-index: 99;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+}

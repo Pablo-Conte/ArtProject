@@ -9,9 +9,10 @@
     var degree = 0;
     var currentHeadX = 0;
     var currentHeadY = 0;
+    var gato
 
 
-    
+    last_splash = new Date()
     // changes 0 to 360 in a proper way
     function changeDegree(increment){
 
@@ -30,18 +31,28 @@
         var w = cat.offsetWidth;
         var h = cat.offsetHeight;
 
-        var speed = 2 * forward;
+        var speed = 4 * forward;
         var angle = degree * Math.PI / 180;
         var dx = speed * Math.cos(angle);
         var dy = speed * Math.sin(angle);
         var newX = x + dx;
         var newY = y + dy;
         
-        if(newX < 0 - w || newX > window.innerWidth){
-            changeDegree(180);
+        if(newX < 0 ){
+            degree = 0
         }
-        if(newY < 0 - h || newY > window.innerHeight){
-            changeDegree(179);
+
+        if(newX > window.innerWidth - w){
+            degree = 180
+        }
+
+
+        if(newY < 0 ){
+            degree = 90 
+        }
+
+        if(newY > window.innerHeight - h){
+            degree = 270 
         }
         cat.style.left = newX + "px";
         cat.style.top = newY + "px";
@@ -84,12 +95,19 @@
 
 
             if(e.key == " "){
+
+                if(last_splash)
                 // doing = "space";
                 var cat = document.getElementsByClassName("cat")[0];
                 var x = cat.offsetLeft;
                 var y = cat.offsetTop;
+                now = new Date()
                 
-                setSplash(x,y);
+                if(now- last_splash > 500){
+                    last_splash = new Date()
+                    setSplash(x,y);
+                }
+                
             }
         }else{
             // just updating
@@ -127,7 +145,7 @@
 
 
      // setting the attributes of the background image 
-    const gato = document.createElement("img");
+    gato = document.createElement("img");
     gato.classList.add("cat")
     gato.style.zIndex = "100"
     gato.src = "./img/gato.gif";
@@ -143,6 +161,7 @@
 
 
 function setSplash(x, y){
+    
     svg_points = [
     [188.180, 472.060],
     [184.918, 453.006],
@@ -276,19 +295,32 @@ function setSplash(x, y){
 
     let newRect = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
     
-    scale = 0.2
+    scale = 0.5
     holds = document.getElementById("holds_splashs")
     newRect.setAttribute("fill","white")
     newRect.setAttribute("transform","scale("+scale+")")
 
     cat = document.getElementsByClassName("cat")[0]
     
-    newRect.setAttribute("points", svg_points.map(p => [p[0]+(cat.width/2)+(x*(1/scale)),p[1]+(cat.height/2)+y*(1/scale)].join(" ") + ", ").join(" "));
+    newRect.setAttribute("points", svg_points.map(
+        p => [p[0]+(cat.width/2)+(-190)+(x*(1/scale)),p[1]+(cat.height/2)+(-190)+y*(1/scale)]
+        .join(" ") + ", ").join(" ")
+        );
     
     holds.appendChild(newRect);
+
+    var audio = new Audio('./song/splash.mp3');
+    audio.volume = 0.3;
+    audio.play();
+
+    
+
+
     
 }
 
 var arrayImg = new Array("./img/back.jpg", "./img/back2.jpg");
 var randomNum = Math.floor(Math.random() * arrayImg.length);
 document.getElementById("backimage").setAttribute("href", arrayImg[randomNum])
+
+
