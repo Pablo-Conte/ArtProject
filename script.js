@@ -76,6 +76,10 @@
             if(e.key == "g"){
                 location.reload()
             }
+
+            if(e.key == "h"){
+                backimage.setAttribute("mask", "")
+            }
             
             if(e.key == "ArrowUp"){
                 doingB = "up"
@@ -144,8 +148,6 @@
         }
     }
 
-
-
      // setting the attributes of the background image 
     gato = document.createElement("img");
     gato.classList.add("cat")
@@ -164,7 +166,7 @@
 
 function setSplash(x, y){
     
-    svg_points = [
+    let svg_points = [
     [188.180, 472.060],
     [184.918, 453.006],
     [199.375, 423.856],
@@ -307,6 +309,8 @@ function setSplash(x, y){
     
 
     cat = document.getElementsByClassName("cat")[0]
+
+    
     
     newPolygon.setAttribute("points", svg_points.map(
         p => [p[0]+(cat.width/2)+(-190)+(x*(1/scale)),p[1]+(cat.height/2)+(-190)+y*(1/scale)]
