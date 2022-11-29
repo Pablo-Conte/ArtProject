@@ -73,7 +73,9 @@
     function handleKeysDown(e){
 
         if(e != null){
-            
+            if(e.key == "g"){
+                location.reload()
+            }
             
             if(e.key == "ArrowUp"){
                 doingB = "up"
@@ -293,21 +295,28 @@ function setSplash(x, y){
     [214.827, 464.692],
     [188.182, 472.067]]
 
-    let newRect = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+    let newPolygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
     
     scale = 0.5
     holds = document.getElementById("holds_splashs")
-    newRect.setAttribute("fill","white")
-    newRect.setAttribute("transform","scale("+scale+")")
+    newPolygon.setAttribute("fill","white")
+    newPolygon.setAttribute("transform","scale("+scale+")")
+    let r = Math.floor(Math.random() * 10)  +2;
+    newPolygon.setAttribute("filter","blur("+r+"px)")
+    // newPolygon.setAttribute("transform","rotate("+degree+"deg)")
+    
 
     cat = document.getElementsByClassName("cat")[0]
     
-    newRect.setAttribute("points", svg_points.map(
+    newPolygon.setAttribute("points", svg_points.map(
         p => [p[0]+(cat.width/2)+(-190)+(x*(1/scale)),p[1]+(cat.height/2)+(-190)+y*(1/scale)]
         .join(" ") + ", ").join(" ")
         );
+
+
     
-    holds.appendChild(newRect);
+    
+    holds.appendChild(newPolygon);
 
     var audio = new Audio('./song/splash.mp3');
     audio.volume = 0.3;
@@ -319,8 +328,21 @@ function setSplash(x, y){
     
 }
 
-var arrayImg = new Array("./img/back.jpg", "./img/back2.jpg");
+var arrayImg = new Array("/back.jpg", "/back2.jpg", '1146px-sandro-botticelli-la-nascita-di-venere-google-art-project-edited-1-cke.webp',
+'718px-the-kiss-gustav-klimt-google-cultural-institute-cke.webp',
+'coluna-partida-cke.gif',
+'Creation_of_Adam.jpg',
+'Fragonard,_The_Swing.jpg',
+'Grant_Wood_-_American_Gothic_-_Google_Art_Project-849x1024.jpg',
+'maxresdefault-12-cke.webp',
+'Pointillism-domingo-por-La-tarde-en-La-isla-de-La-Grande-Jatte-by-Georges-Seurat-impresiones.jpg_640x640.jpg',
+'relog.jpg',
+'romero_britto_carmem_miranda_2.webp',
+'wallpaperbetter (1).jpg',
+'wallpaperbetter (2).jpg',
+'wallpaperbetter (3).jpg',
+'wallpaperbetter.jpg');
 var randomNum = Math.floor(Math.random() * arrayImg.length);
-document.getElementById("backimage").setAttribute("href", arrayImg[randomNum])
+document.getElementById("backimage").setAttribute("href", "./img/"+ encodeURIComponent(arrayImg[randomNum]) )
 
 
